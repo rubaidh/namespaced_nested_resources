@@ -1,13 +1,26 @@
 NamespacedNestedResources
 =========================
 
-Introduction goes here.
+This plugin makes nesting resources for a namespace a little bit easier by allowing controllers to be organised into directories whilst keeping routes short and sweet.
 
+Tested to work with rails 2.3
 
 Example
 =======
 
-Example goes here.
+In a scenario where you have an admin section and you have the following:
+- app/controllers/admin/categories_controller.rb
+- app/controllers/admin/categories/products_controller.rb
+
+If you wish to nest these two controllers in the routing you would need to explicitly set where they live. With the plugin you can short form the routings to look like:
+
+map.namespace :admin do |admin|
+  admin.resources :categories do |category|
+    category.resources :products
+  end
+end
+
+Without the plugin, the above route would error, as it would be looking for Admin::ProductsController rather than Admin::Categories::ProductsController
 
 
-Copyright (c) 2007 [name of plugin creator], released under the MIT license
+Copyright (c) 2007-2009 Rubaidh Ltd, released under the MIT license
